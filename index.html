@@ -18,6 +18,8 @@
 </head>
 <body>
   <div id="app">
+    <div id="stage">
+      <div id="map-wrap">
     <header class="topbar">
       <div class="brand">
         <span class="mark">▲</span>
@@ -31,16 +33,13 @@
         <button type="submit" aria-label="Search">Go</button>
       </form>
     </header>
-
-    <div id="map"></div>
-    <div id="elev-chip" hidden></div>
-
-    <div class="fab-col">
-      <button id="btn-locate" class="fab" title="My area">⌖</button>
-      <button id="btn-pitch" class="fab" title="Tilt / 3D view">3D</button>
-    </div>
-
-    <section class="sheet" id="sheet">
+        <div id="map"></div>
+        <div id="elev-chip" hidden></div>
+        <div class="fab-col">
+          <button id="btn-locate" class="fab" title="My area">⌖</button>
+          <button id="btn-pitch" class="fab" title="Tilt / 3D view">3D</button>
+        </div>
+        <section class="sheet" id="sheet">
       <div class="grab"></div>
       <div class="row wrap">
         <label class="toggle">
@@ -83,8 +82,21 @@
         <button id="btn-clear-beds" class="secondary">Clear pins</button>
       </div>
       <p class="hint" id="bed-note">Terrain-only: south-facing mid-slopes. Not cover, food, or pressure.</p>
-      <p class="hint">Free AWS Terrarium DEM (~30–12 m). No API key. Tilt the map, then forge a mesh you can export.</p>
+      <p class="hint">Free AWS Terrarium DEM (~30–12 m). No API key. Live mesh follows the map.</p>
     </section>
+      </div>
+      <section id="live">
+        <div class="live-bar">
+          <span>Live mesh</span>
+          <b id="live-status">waiting…</b>
+          <label class="toggle tight">
+            <input type="checkbox" id="chk-live" checked />
+            <span>Follow map</span>
+          </label>
+        </div>
+        <canvas id="live3d"></canvas>
+      </section>
+    </div>
 
     <section id="studio" class="studio" hidden>
       <header>
