@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>Terraview</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark">▲</span>
+        <div>
+          <strong>Terraview</strong>
+          <small>map · terrain · mesh</small>
+        </div>
+      </div>
+      <form id="search-form" autocomplete="off">
+        <input id="search" type="search" placeholder="Search a place…" enterkeyhint="search" />
+        <button type="submit" aria-label="Search">Go</button>
+      </form>
+    </header>
+
+    <div id="map"></div>
+    <div id="elev-chip" hidden></div>
+
+    <div class="fab-col">
+      <button id="btn-locate" class="fab" title="My area">⌖</button>
+      <button id="btn-pitch" class="fab" title="Tilt / 3D view">3D</button>
+    </div>
+
+    <section class="sheet" id="sheet">
+      <div class="grab"></div>
+      <div class="row wrap">
+        <label class="toggle">
+          <input type="checkbox" id="chk-terrain" checked />
+          <span>Terrain</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="chk-hills" checked />
+          <span>Hillshade</span>
+        </label>
+        <select id="basemap" aria-label="Basemap">
+          <option value="streets">Streets</option>
+          <option value="imagery">Satellite</option>
+          <option value="topo">Topo</option>
+          <option value="opentopo">OpenTopo</option>
+        </select>
+      </div>
+
+      <label class="slider">
+        <span>Exaggeration <b id="exag-val">1.6×</b></span>
+        <input id="exag" type="range" min="0.4" max="4" step="0.1" value="1.6" />
+      </label>
+
+      <div class="row wrap presets" id="presets"></div>
+
+      <div class="actions">
+        <button id="btn-mesh" class="primary">Forge 3D model</button>
+        <label class="tiny">
+          Mesh
+          <select id="res">
+            <option value="64">64² fast</option>
+            <option value="96" selected>96²</option>
+            <option value="128">128²</option>
+            <option value="160">160² fine</option>
+          </select>
+        </label>
+      </div>
+      <div class="actions">
+        <button id="btn-beds" class="secondary">Pin likely beds</button>
+        <button id="btn-clear-beds" class="secondary">Clear pins</button>
+      </div>
+      <p class="hint" id="bed-note">Terrain-only: south-facing mid-slopes. Not cover, food, or pressure.</p>
+      <p class="hint">Free AWS Terrarium DEM (~30–12 m). No API key. Tilt the map, then forge a mesh you can export.</p>
+    </section>
+
+    <section id="studio" class="studio" hidden>
+      <header>
+        <button id="btn-close-studio" class="ghost">← Map</button>
+        <div class="studio-meta" id="studio-meta">Terrain mesh</div>
+        <button id="btn-export-obj" class="ghost">OBJ</button>
+        <button id="btn-export-gltf" class="ghost">GLTF</button>
+      </header>
+      <canvas id="view3d"></canvas>
+      <div class="studio-tools">
+        <label class="slider">
+          <span>Mesh exaggeration <b id="mesh-exag-val">1.6×</b></span>
+          <input id="mesh-exag" type="range" min="0.4" max="6" step="0.1" value="1.6" />
+        </label>
+        <div class="row wrap">
+          <label class="toggle"><input type="checkbox" id="chk-wire" /><span>Wire</span></label>
+          <label class="toggle"><input type="checkbox" id="chk-hyps" checked /><span>Elevation colors</span></label>
+          <label class="toggle"><input type="checkbox" id="chk-drape" /><span>Drape satellite</span></label>
+        </div>
+        <p class="hint" id="mesh-stats"></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
