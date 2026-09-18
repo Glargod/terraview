@@ -1,31 +1,22 @@
 # Terraview
 
-Map, live 3D terrain, and a downloadable terrain mesh. One file: `index.html`.
-
-Live (after Pages is on): https://glargod.github.io/terraview/
+Map on top. Live elevation mesh underneath. Pan or zoom the map and the mesh follows.
 
 ## Use
 
-- Search or use the Nova Scotia presets
-- Tilt with **3D** or the pitch control
-- **Forge 3D model** then export OBJ / GLB
-- **Pin likely beds** marks terrain-only candidate bedding sites
+Open `index.html` (GitHub Pages or any static host).
 
-## Bedding pins
-
-Guesses from elevation only:
-
-- land above ~3 m
-- slope about 3–30°
-- preference for south / SSW aspect (winter warmth in the Maritimes)
-- mid-slope, not a ridge crest or a wet toe
-
-No forest cover, snow, wind, food, or hunting pressure. Treat pins as “walk here and look,” not a guarantee.
+- Search or tap a preset
+- Tilt with **3D**
+- Live mesh samples AWS Terrarium DEM for the current viewport
+- Uncheck **Follow map** to freeze the mesh
+- **Forge 3D model** opens a higher-res studio with OBJ / GLTF export
+- **Pin likely beds** is a terrain-only guess (southish mid-slopes)
 
 ## Data
 
-AWS Terrarium DEM tiles (Mapzen stack). Streets / satellite / topo from Esri. Search via Nominatim.
+- Elevation: AWS Terrain Tiles (Terrarium, no key)
+- Basemaps: Esri + OpenTopoMap
+- Geocode: Nominatim
 
-## Enable GitHub Pages
-
-Repo Settings → Pages → Deploy from branch `main` / root.
+No build step. Vanilla HTML / CSS / JS + MapLibre + Three.js.
